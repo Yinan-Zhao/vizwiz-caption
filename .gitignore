@@ -1,0 +1,17 @@
+*.pyc
+.idea
+.ipynb_checkpoints
+# results folder
+results/VizWiz_Fake_Captions.json.org
+results/VizWiz_Fake_Captions_eval.json
+results/VizWiz_Fake_Captions_eval_imgs.json
+
+# uncomment the following from VizWiz API when they become relevant
+vizwiz_api/_mask.pyx
+vizwiz_api/mask.py
+
+vizwiz_eval_cap/spice/lib/stanford-corenlp-3.6.0-models.jar
+vizwiz_eval_cap/spice/lib/stanford-corenlp-3.6.0.jar
+vizwiz_eval_cap/spice/cache/
+vizwiz_eval_cap/spice/tmp/
+zz_test.py
