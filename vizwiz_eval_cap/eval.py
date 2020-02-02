@@ -28,8 +28,9 @@ class VizWizEvalCap:
         gts = {}
         res = {}
         for imgId in imgIds:
-            gts[imgId] = self.vizwiz.imgToAnns[imgId]
-            res[imgId] = self.vizwizRes.imgToAnns[imgId]
+            if self.vizwiz.imgToAnns[imgId]:
+                gts[imgId] = self.vizwiz.imgToAnns[imgId]
+                res[imgId] = self.vizwizRes.imgToAnns[imgId]
 
         # =================================================
         # Set up scorers

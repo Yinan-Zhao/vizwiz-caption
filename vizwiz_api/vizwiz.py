@@ -67,7 +67,7 @@ def _isArrayLike(obj):
 
 
 class VizWiz:
-    def __init__(self, annotation_file=None):
+    def __init__(self, annotation_file=None, ignore_rejected=True, ignore_precanned=True):
         """
         Constructor of VizWiz helper class for reading and visualizing annotations.
         :param annotation_file (str): location of annotation file
@@ -82,8 +82,20 @@ class VizWiz:
             tic = time.time()
             dataset = json.load(open(annotation_file, 'r'))
             assert type(dataset) == dict, 'annotation file format {} not supported'.format(type(dataset))
+            self.dataset = {}
+            for key, value in dataset.items():
+                if key != 'annotations':
+                    self.dataset[key] = value
+            self.dataset['annotations'] = []
+            for annotation in dataset['annotations']:
+                if (ignore_rejected and annotation['is_rejected']) \
+                    or (ignore_precanned and annotation['is_precanned']):
+                    continue
+                else:
+                    self.dataset['annotations'].append(annotation)
+            
             print('Done (t={:0.2f}s)'.format(time.time()- tic))
-            self.dataset = dataset
+            #self.dataset = dataset
             self.createIndex()
 
     def createIndex(self):
